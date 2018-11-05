@@ -21,15 +21,20 @@ func main() {
 			break
 		}
 		yamlFile += line
-		// fmt.Printf(yamlFile)
 	}
+
+	// FIX BUG - the last line is not an empty line
+	if yamlFile[len(yamlFile)-1] == '\n' {
+		yamlFile += "\n"
+	}
+	// log.Println(yamlFile[len(yamlFile)-1])
+	// log.Println('\n')
 
 	yamlMap := make(map[interface{}]interface{})
 	err := yaml.Unmarshal([]byte(yamlFile), &yamlMap)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	// fmt.Printf("--- yamlMap:\n%v\n\n", yamlMap)
 
 	dump, err := yaml.Marshal(&yamlMap)
 	if err != nil {
