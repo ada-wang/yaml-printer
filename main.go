@@ -23,6 +23,10 @@ func main() {
 		yamlFile += line
 	}
 
+	if yamlFile == "" {
+		log.Fatalln("STDIN is nil, exit")
+	}
+
 	// FIX BUG - the last line is not an empty line
 	if yamlFile[len(yamlFile)-1] == '\n' {
 		yamlFile += "\n"
